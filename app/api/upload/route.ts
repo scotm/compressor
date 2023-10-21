@@ -1,9 +1,8 @@
-import { put } from '@vercel/blob';
 import { NextResponse } from 'next/server';
 import sharp from 'sharp';
-import { Readable } from 'stream';
-import { streamToBuffer } from '../../../lib/stream/streamToBuffer';
-import { PostReturnType } from '../../../lib/types/PostReturnType';
+import { streamToBuffer } from '@/lib/stream/streamToBuffer';
+import { PostReturnType } from '@/lib/types/PostReturnType';
+import { storeFileinBlobStorage } from '@/lib/blob/azureBlobStorage';
 
 // export const runtime = 'edge';
 
@@ -38,10 +37,7 @@ export async function POST(req: Request): Promise<NextResponse<PostReturnType>> 
         });
     }
 
-    const blob = await put(filename, Readable.from(image), {
-        contentType,
-        access: 'public',
-    });
+    const blob = await storeFileinBlobStorage(filename, image, 'images');
 
     return NextResponse.json({
         status: 'success',
