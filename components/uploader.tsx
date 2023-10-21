@@ -187,7 +187,7 @@ const Uploader: React.FC = () => {
                                         target="_blank"
                                         rel="noopener noreferrer"
                                     >
-                                        {url.split('/').pop()}
+                                        Download
                                     </a>
                                 ) : (
                                     <p className="text-sm text-gray-500"></p>
