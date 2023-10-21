@@ -1,0 +1,5 @@
+{
+    "rules": {
+        "rule-empty-line-before": ["always", { "ignore": ["first-nested", "after-comment"] }]
+    }
+}
