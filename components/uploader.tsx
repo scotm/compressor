@@ -110,7 +110,7 @@ const Uploader: React.FC = () => {
                         method: 'POST',
                         headers: {
                             'content-type': file.type || 'application/octet-stream',
-                            'x-filename': file.name,
+                            'original-filename': file.name,
                         },
                         body: file,
                     }).then(onSuccessfulUpload);
