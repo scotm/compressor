@@ -4,7 +4,7 @@ import { streamToBuffer } from '@/lib/stream/streamToBuffer';
 import { PostReturnType } from '@/lib/types/PostReturnType';
 import { storeFileinBlobStorage } from '@/lib/blob/azureBlobStorage';
 
-// export const runtime = 'edge';
+export const runtime = 'edge';
 
 const contentType = 'image/webp';
 
