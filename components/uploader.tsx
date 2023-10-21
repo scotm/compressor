@@ -29,14 +29,14 @@ function successToast(url: string) {
                             target="_blank"
                             rel="noopener noreferrer"
                         >
-                            {url}
+                            blob storage
                         </a>
                     </p>
                 </div>
                 <DismissButton t={t} toast={toast} />
             </div>
         ),
-        { duration: 300000 },
+        { duration: 3000 },
     );
 }
 
@@ -186,6 +186,7 @@ const Uploader: React.FC = () => {
                                         href={url}
                                         target="_blank"
                                         rel="noopener noreferrer"
+                                        download
                                     >
                                         Download
                                     </a>
