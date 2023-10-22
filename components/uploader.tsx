@@ -48,23 +48,19 @@ const Uploader: React.FC = () => {
     const checkAndSetFiles = (new_files: FileList | null) => {
         if (new_files) {
             const alreadyUploaded = files.map((file) => file.file.name);
-            const output: UploadedFiles[] = [];
+            const add_list: UploadedFiles[] = [];
             for (const file of new_files) {
                 if (file.size / 1024 / 1024 > 50) {
                     toast.error('File size too big (max 50MB)');
                     return;
                 } else {
                     if (!alreadyUploaded.includes(file.name)) {
-                        output.push({ file, url: null });
+                        add_list.push({ file, url: null });
                     }
                 }
             }
-            setFiles((old) => [...old, ...output]);
+            setFiles((prev) => [...prev, ...add_list]);
         }
-    };
-
-    const onChangePicture = (event: ChangeEvent<HTMLInputElement>) => {
-        checkAndSetFiles(event.target.files);
     };
 
     const onSuccessfulUpload = async (res: Response) => {
@@ -174,7 +170,7 @@ const Uploader: React.FC = () => {
                         multiple={true}
                         accept="image/*"
                         className="sr-only"
-                        onChange={onChangePicture}
+                        onChange={(e) => checkAndSetFiles(e.target.files)}
                     />
                 </div>
                 {files && files.length > 0 && (
