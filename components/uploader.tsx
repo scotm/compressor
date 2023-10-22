@@ -45,18 +45,21 @@ const Uploader: React.FC = () => {
     const [dragActive, setDragActive] = useState(false);
     const [saving, setSaving] = useState(false);
 
-    const checkAndSetFiles = (files: FileList | null) => {
-        if (files) {
+    const checkAndSetFiles = (new_files: FileList | null) => {
+        if (new_files) {
+            const alreadyUploaded = files.map((file) => file.file.name);
             const output: UploadedFiles[] = [];
-            for (const file of files) {
+            for (const file of new_files) {
                 if (file.size / 1024 / 1024 > 50) {
                     toast.error('File size too big (max 50MB)');
                     return;
                 } else {
-                    output.push({ file, url: null });
+                    if (!alreadyUploaded.includes(file.name)) {
+                        output.push({ file, url: null });
+                    }
                 }
             }
-            setFiles(output);
+            setFiles((old) => [...old, ...output]);
         }
     };
 
@@ -105,7 +108,10 @@ const Uploader: React.FC = () => {
                     setSaving(false);
                     return;
                 }
-                files.forEach(({ file }) => {
+                files.forEach(({ file, url }) => {
+                    if (url) {
+                        return;
+                    }
                     fetch('/api/upload', {
                         method: 'POST',
                         headers: {
@@ -173,16 +179,18 @@ const Uploader: React.FC = () => {
                 </div>
                 {files && files.length > 0 && (
                     <div className="mt-2 grid grid-cols-2">
-                        <p className="col-span-2 text-sm text-gray-500">{files.length} files selected</p>
+                        <p className="col-span-2 text-sm text-gray-500 text-center font-bold m-2">
+                            {files.length} files selected
+                        </p>
                         {files.map(({ file, url }) => (
                             <>
-                                <p key={file.name} className="text-sm text-gray-500">
+                                <p key={file.name} className="text-sm text-gray-500 m-2">
                                     {file.name}
                                 </p>
                                 {url ? (
                                     <a
                                         key={url}
-                                        className="text-sm text-gray-500 hover:text-red-500 font-bold"
+                                        className="text-sm text-gray-500 hover:text-red-500 font-bold m-2"
                                         href={url}
                                         target="_blank"
                                         rel="noopener noreferrer"
@@ -191,7 +199,7 @@ const Uploader: React.FC = () => {
                                         Download
                                     </a>
                                 ) : (
-                                    <p className="text-sm text-gray-500"></p>
+                                    <p className="text-sm text-gray-500 m-2"></p>
                                 )}
                             </>
                         ))}
