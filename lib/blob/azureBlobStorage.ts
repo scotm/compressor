@@ -51,6 +51,7 @@ async function uploadBlob(
             return {
                 url: blockBlobClient.url,
                 pathname: blockBlobClient.name,
+                downloadUrl: blockBlobClient.url,
                 contentType: '',
                 contentDisposition: '',
             };
@@ -64,8 +65,7 @@ async function uploadBlob(
     await blockBlobClient.upload(blob, blob.byteLength, {
         blobHTTPHeaders: http_headers,
     });
-    const url = blockBlobClient.url;
-    return { url, pathname: blockBlobClient.name, contentType: '', contentDisposition: '' };
+    return { url: blockBlobClient.url, pathname: blockBlobClient.name, contentType: '', contentDisposition: '', downloadUrl:  blockBlobClient.url };
 }
 
 async function CreateBlobServiceClient(): Promise<BlobServiceClient> {

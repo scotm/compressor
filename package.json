@@ -11,25 +11,26 @@
         "generate": "drizzle-kit generate:pg"
     },
     "dependencies": {
-        "@azure/storage-blob": "^12.16.0",
-        "@types/node": "20.8.7",
-        "@types/react": "18.2.31",
-        "@types/react-dom": "18.2.14",
-        "@vercel/blob": "^0.14.0",
-        "autoprefixer": "10.4.16",
-        "eslint": "8.52.0",
-        "eslint-config-next": "13.5.6",
-        "next": "13.5.6",
-        "postcss": "8.4.31",
-        "react": "18.2.0",
-        "react-dom": "18.2.0",
+        "@azure/storage-blob": "^12.24.0",
+        "@types/node": "22.5.5",
+        "@types/react": "18.3.7",
+        "@types/react-dom": "18.3.0",
+        "@vercel/blob": "^0.24.0",
+        "autoprefixer": "10.4.20",
+        "eslint": "8.57.0",
+        "eslint-config-next": "14.2.12",
+        "next": "14.2.12",
+        "postcss": "8.4.47",
+        "react": "18.3.1",
+        "react-dom": "18.3.1",
         "react-hot-toast": "^2.4.1",
-        "sharp": "^0.32.6",
-        "tailwindcss": "3.3.3",
-        "typescript": "5.2.2"
+        "sharp": "^0.33.5",
+        "tailwindcss": "3.4.12",
+        "typescript": "5.6.2"
     },
     "devDependencies": {
-        "@types/ms": "^0.7.33",
-        "turbo": "^1.10.16"
+        "@types/ms": "^0.7.34",
+        "turbo": "^2.1.2",
+        "@typescript-eslint/parser": "8.6.0"
     }
 }
